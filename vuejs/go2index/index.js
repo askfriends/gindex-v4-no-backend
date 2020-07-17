@@ -1,12 +1,11 @@
 // =======Options START=======
 var authConfig = {
   siteName: "Glory to Heaven",
-  version: "v7.7.5",
+  version: "v7.7.6",
   github_name: "tks18",
-  github_repo: "gindex-v4",
+  github_repo: "gindex-v4-no-backend",
   favicon: "https://raw.githubusercontent.com/tks18/infozy/develop/favicon.ico",
   client_id: "client_id",
-  backendSite: "http://localhost:3000",
   client_secret: "client_id",
   refresh_token: "refresh_token",
   roots: [
@@ -137,70 +136,37 @@ var trendingPosters = [
   },
 ];
 var quickLinks = [
+  {
+    root: 0,
+    link: [
       {
-        root: 0,
-        link: [
-          {
-            displayname: "Anime", // Name to Display
-            link: "Anime", // Note: This is Case Sensitive .Give Drive Folder Name Here from Default Drive.
-          },
-          {
-            displayname: "Movies",
-            link: "Movies",
-          },
-          {
-            displayname: "TV Series",
-            link: "Series",
-          },
-          {
-            displayname: "Courses",
-            link: "Courses",
-          },
-          {
-            displayname: "Music",
-            link: "Music",
-          },
-        ],
+        displayname: "Anime",
+        link: "Anime",
+        faIcon: "fas fa-heart",
       },
-    ];
-var routes = {
-  checkEmail: authConfig.backendSite + '/checkmail',
-  loginRoute: authConfig.backendSite + '/login',
-  registerRoute: authConfig.backendSite + '/register/user',
-  otpRegister: authConfig.backendSite + '/register/approve/otp',
-  requestRoute: authConfig.backendSite + '/request/user',
-  verifyRoute: authConfig.backendSite + '/user/verify',
-  changePasswordRoute: authConfig.backendSite + '/user/changepassword',
-  requestadminroute: authConfig.backendSite + '/request/admin',
-  requestsuperadminroute: authConfig.backendSite + '/request/superadmin',
-  getPendingUsers: authConfig.backendSite + '/get/pending/users',
-  getPendingAdmins: authConfig.backendSite + '/get/pending/admins',
-  getPendingSuperAdmins: authConfig.backendSite + '/get/pending/superadmins',
-  deletePendingUsers: authConfig.backendSite + '/request/remove/user',
-  deletePendingAdmins: authConfig.backendSite + '/request/remove/admin',
-  deletePendingSuperAdmins: authConfig.backendSite + '/request/remove/superadmin',
-  upgradeAdmin: authConfig.backendSite + '/register/approve/admin',
-  upgradeSuperAdmin: authConfig.backendSite + '/register/approve/superadmin',
-  inviteUser: authConfig.backendSite + '/invite/user',
-  inviteAdmin: authConfig.backendSite + '/invite/admin',
-  inviteSuperAdmin: authConfig.backendSite + '/invite/superadmin',
-  addSpamUser: authConfig.backendSite + '/spam/user',
-  addSpamAdmin: authConfig.backendSite + '/spam/admin',
-  addSpamSuperAdmin: authConfig.backendSite + '/spam/superadmin',
-  removeSpamUser: authConfig.backendSite + '/spam/remove/user',
-  removeSpamAdmin: authConfig.backendSite + '/spam/remove/admin',
-  removeSpamSuperadmin: authConfig.backendSite + '/spam/remove/superadmin',
-  getSpamUsers: authConfig.backendSite + '/get/spam/users',
-  getSpamAdmins: authConfig.backendSite + '/get/spam/admins',
-  getSpamSuperadmins: authConfig.backendSite + '/get/spam/superadmins',
-  deleteUser: authConfig.backendSite + '/delete/user',
-  deleteMe: authConfig.backendSite + '/user/delete',
-  deleteAdmin: authConfig.backendSite + '/delete/admin',
-  getUsers: authConfig.backendSite + '/get/users',
-  getAll: authConfig.backendSite + '/get/all',
-  getAdmins: authConfig.backendSite + '/get/admins',
-  getSuperAdmins: authConfig.backendSite + '/get/superadmins'
-};
+      {
+        displayname: "Movies",
+        link: "Movies",
+        faIcon: "fas fa-video",
+      },
+      {
+        displayname: "TV Series",
+        link: "Series",
+        faIcon: "fas fa-tv",
+      },
+      {
+        displayname: "Courses",
+        link: "Courses",
+        faIcon: "fas fa-glasses",
+      },
+      {
+        displayname: "Music",
+        link: "Music",
+        faIcon: "fas fa-play",
+      },
+    ],
+  },
+];
 // =======Options END=======
 
 
@@ -290,7 +256,6 @@ function html(current_drive_order = 0, model = {}) {
         return categoryData;
       }))}'
     );
-    window.apiRoutes = JSON.parse('${JSON.stringify(routes)}');
     window.themeOptions = JSON.parse('${JSON.stringify(themeOptions)}');
     window.gds = JSON.parse('${JSON.stringify(
       authConfig.roots.map((it) => it.name)

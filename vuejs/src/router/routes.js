@@ -13,7 +13,6 @@ const frameIn = [{
     meta: {
       ...meta,
       view: 'text',
-      requiresAuth: true,
     }
   },
   {
@@ -23,7 +22,6 @@ const frameIn = [{
     meta: {
       ...meta,
       view: 'pdf',
-      requiresAuth: true,
     }
   },
   {
@@ -42,7 +40,6 @@ const frameIn = [{
     meta: {
       ...meta,
       view: 'video',
-      requiresAuth: true,
     }
   },
   {
@@ -52,7 +49,6 @@ const frameIn = [{
     meta: {
       ...meta,
       view: 'audio',
-      requiresAuth: true,
     }
   },
   {
@@ -62,7 +58,6 @@ const frameIn = [{
     meta: {
       ...meta,
       view: 'image',
-      requiresAuth: true,
     }
   },
   {
@@ -72,7 +67,6 @@ const frameIn = [{
     meta: {
       ...meta,
       view: 'list',
-      requiresAuth: true,
     }
   },
   {
@@ -82,46 +76,7 @@ const frameIn = [{
     meta: {
       ...meta,
       view: 'list',
-      requiresAuth: true,
     }
-  },
-  {
-      path: '/:id(\\d)::cmd(login)/',
-      name: 'login',
-      component: _import("page/static/Users/Login"),
-      meta: {
-          ...meta,
-          guest: true
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(register)/',
-      name: 'register',
-      component: _import("page/static/Admin/Register"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-          admin: true
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(invite)/',
-      name: 'invite',
-      component: _import("page/static/Admin/Invite"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-          admin: true
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(register)/otp',
-      name: 'otp',
-      component: _import("page/static/OtpRegister"),
-      meta: {
-          ...meta,
-          guest: true,
-      }
   },
   {
       path: '/:id(\\d)::cmd(home)/',
@@ -129,93 +84,6 @@ const frameIn = [{
       component: _import("page/static/Home"),
       meta: {
           ...meta,
-          guest: true,
-          allow: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(result)/',
-      name: 'results',
-      component: _import("page/static/ResultPage"),
-      meta: {
-          ...meta,
-          guest: true,
-          allow: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(register)/request/user',
-      name: 'request',
-      component: _import("page/static/Request"),
-      meta: {
-          ...meta,
-          guest: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(settings)/request/',
-      name: 'requestadmin',
-      component: _import("page/static/Users/RequestPrivs"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(settings)/changepassword',
-      name: 'changepassword',
-      component: _import("page/static/Users/ChangePassword"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(admin)/',
-      name: 'admin',
-      component: _import("page/static/Admin/AdminArea"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-          admin: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(admin)/manage',
-      name: 'manageUsers',
-      component: _import("page/static/Admin/ManageUsers"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-          admin: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(admin)/spam',
-      name: 'managespam',
-      component: _import("page/static/Admin/ManageSpamUsers"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-          admin: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(settings)/',
-      name: 'settings',
-      component: _import("page/static/Users/Settings"),
-      meta: {
-          ...meta,
-          requiresAuth: true,
-      }
-  },
-  {
-      path: '/:id(\\d)::cmd(delete)/me',
-      name: 'deleteme',
-      component: _import("page/static/Users/DeleteMe"),
-      meta: {
-          ...meta,
-          requiresAuth: true
       }
   },
 ];
