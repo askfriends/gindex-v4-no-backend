@@ -8,9 +8,6 @@ import axios from "@/plugin/axios";
 import VueAxios from "vue-axios";
 import router from "./router";
 import vSelect from 'vue-select';
-import EventBus from "./EventBus";
-import Crypto from "crypto-js";
-import secret from "../secret";
 import i18n from "./i18n";
 import VuePlyr from "vue-plyr"
 // store
@@ -23,11 +20,8 @@ import '@/components'
 import "viewerjs/dist/viewer.css";
 import "@/assets/style/theme/register.scss";
 
-Vue.prototype.$hash = Crypto;
-Vue.prototype.$pass = secret.pass;
 Vue.config.productionTip = false;
 Vue.prototype.$cdnpath = cdnpath;
-Vue.prototype.$bus = EventBus;
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
 Vue.component('v-select', vSelect)

@@ -39,7 +39,7 @@
     };
     var themeOptions = {
       languages: 'en',
-      netflix_home: true, //If True Dont Forget to Fill in all the Required Details
+      netflix_home: false, //If True Dont Forget to Fill in all the Required Details
       prefer_netflix_black: false,
       loading_image: "https://i.ibb.co/bsqHW2w/Lamplight-Mobile.gif", // Max Width and Height - 250px. Do not Enter Images more than 250px wide.
       footer_data: {
@@ -152,72 +152,38 @@
       },
     ];
     var quickLinks = [
+      {
+        root: 0,
+        link: [
           {
-            root: 0,
-            link: [
-              {
-                displayname: "Anime", // Name to Display
-                link: "Anime", // Note: This is Case Sensitive .Give Drive Folder Name Here from Default Drive.
-              },
-              {
-                displayname: "Movies",
-                link: "Movies",
-              },
-              {
-                displayname: "TV Series",
-                link: "Series",
-              },
-              {
-                displayname: "Courses",
-                link: "Courses",
-              },
-              {
-                displayname: "Music",
-                link: "Music",
-              },
-            ],
+            displayname: "Anime",
+            link: "Anime",
+            faIcon: "fas fa-heart",
           },
-        ];
-    var routes = {
-      checkEmail: 'http://localhost:3000/checkmail',
-      loginRoute: 'http://localhost:3000/login',
-      registerRoute: 'http://localhost:3000/register/user',
-      otpRegister: 'http://localhost:3000/register/approve/otp',
-      requestRoute: 'http://localhost:3000/request/user',
-      verifyRoute: 'http://localhost:3000/user/verify',
-      changePasswordRoute: 'http://localhost:3000/user/changepassword',
-      requestadminroute: 'http://localhost:3000/request/admin',
-      requestsuperadminroute: 'http://localhost:3000/request/superadmin',
-      getPendingUsers: 'http://localhost:3000/get/pending/users',
-      getPendingAdmins: 'http://localhost:3000/get/pending/admins',
-      getPendingSuperAdmins: 'http://localhost:3000/get/pending/superadmins',
-      deletePendingUsers: 'http://localhost:3000/request/remove/user',
-      deletePendingAdmins: 'http://localhost:3000/request/remove/admin',
-      deletePendingSuperAdmins: 'http://localhost:3000/request/remove/superadmin',
-      upgradeAdmin: 'http://localhost:3000/register/approve/admin',
-      upgradeSuperAdmin: 'http://localhost:3000/register/approve/superadmin',
-      inviteUser: 'http://localhost:3000/invite/user',
-      inviteAdmin: 'http://localhost:3000/invite/admin',
-      inviteSuperAdmin: 'http://localhost:3000/invite/superadmin',
-      addSpamUser: 'http://localhost:3000/spam/user',
-      addSpamAdmin: 'http://localhost:3000/spam/admin',
-      addSpamSuperAdmin: 'http://localhost:3000/spam/superadmin',
-      removeSpamUser: 'http://localhost:3000/spam/remove/user',
-      removeSpamAdmin: 'http://localhost:3000/spam/remove/admin',
-      removeSpamSuperadmin: 'http://localhost:3000/spam/remove/superadmin',
-      getSpamUsers: 'http://localhost:3000/get/spam/users',
-      getSpamAdmins: 'http://localhost:3000/get/spam/admins',
-      getSpamSuperadmins: 'http://localhost:3000/get/spam/superadmins',
-      deleteUser: 'http://localhost:3000/delete/user',
-      deleteMe: 'http://localhost:3000/user/delete',
-      deleteAdmin: 'http://localhost:3000/delete/admin',
-      getUsers: 'http://localhost:3000/get/users',
-      getAll: 'http://localhost:3000/get/all',
-      getAdmins: 'http://localhost:3000/get/admins',
-      getSuperAdmins: 'http://localhost:3000/get/superadmins'
-    }
+          {
+            displayname: "Movies",
+            link: "Movies",
+            faIcon: "fas fa-video",
+          },
+          {
+            displayname: "TV Series",
+            link: "Series",
+            faIcon: "fas fa-tv",
+          },
+          {
+            displayname: "Courses",
+            link: "Courses",
+            faIcon: "fas fa-glasses",
+          },
+          {
+            displayname: "Music",
+            link: "Music",
+            faIcon: "fas fa-play",
+          },
+        ],
+      },
+    ];
     window.gdconfig = JSON.parse(JSON.stringify({ version: authConfig.version, themeOptions: themeOptions }));
-    window.apiRoutes = routes;
     window.themeOptions = themeOptions;
     window.quickLinks = JSON.parse(
       JSON.stringify(quickLinks.map((link) => {
