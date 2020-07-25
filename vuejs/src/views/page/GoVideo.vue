@@ -1,13 +1,13 @@
 <template>
-  <div :class="ismobile ? 'content nopad mt-2 mx-0 px-0 mt-2' : 'content nopad mt-2 mt-2 ml-5 mr-5'">
+  <div :class="ismobile ? 'content nopad mt-2 mx-1 px-1 mt-2' : 'content nopad mt-2 mt-2 ml-5 mr-5'">
     <div class="columns is-multiline is-centered">
-      <div class="column is-two-thirds">
+      <div :class="ismobile ? 'column is-full mx-0 px-1' : 'column is-two-thirds'">
         <div class="columns is-desktop is-multiline is-centered">
           <div class="column is-full">
             <vue-plyr ref="plyr">
               <video :src="apiurl" class="video-content">
-                <source :src="apiurl" type="video/mp4" size="720">
-                <source :src="apiurl" type="video/mp4" size="1080">
+                <source :src="apiurl" type="video/mp4" size="Original Format">
+                <track kind="captions" label="English captions" :src="suburl" srclang="en" default />
               </video>
             </vue-plyr>
             <div class="box has-background-black">
@@ -61,17 +61,17 @@
             </div>
           </div>
           <div class="column is-full">
-            <div class="box has-text-centered has-background-dark">
+            <div class="box has-text-centered has-background-black">
               <div class="columns is-centered is-vcentered is-multiline">
                 <div class="column is-2">
                   <button class="button is-success is-rounded" v-clipboard:copy="videourl">
                     <span class="icon is-small">
                       <i class="fa fa-copy"></i>
                     </span>
-                    <span>Share Link</span>
+                    <span>{{ ismobile ? 'Share Link' : 'Stream Link'}}</span>
                   </button>
                 </div>
-                <div class="column is-4">
+                <div v-if="ismobile" class="column is-4">
                   <button class="button is-success is-rounded" @click="modal=true;">
                     <span class="icon">
                      <i class="fas fa-play"></i>
@@ -135,6 +135,7 @@
         <div
           v-show="loading"
           class="has-text-centered no-content"
+          :style="'background: url('+loadImage+') no-repeat 50% 50%;height: 240px;line-height: 240px;text-align: center;margin-top: 20px;'"
           >
         </div>
       </div>
@@ -153,6 +154,15 @@ import {
 import InfiniteLoading from "vue-infinite-loading";
 import { mapState } from "vuex";
 import { decode64 } from "@utils/AcrouUtil";
+const srt2vtt = s =>
+	'WEBVTT FILE\r\n\r\n' +
+	s
+		.replace(/\{\\([ibu])\}/g, '</$1>')
+		.replace(/\{\\([ibu])1\}/g, '<$1>')
+		.replace(/\{([ibu])\}/g, '<$1>')
+		.replace(/\{\/([ibu])\}/g, '</$1>')
+		.replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2')
+		.concat('\r\n\r\n')
 export default {
   components: {
     InfiniteLoading,
@@ -164,9 +174,12 @@ export default {
       modal: false,
       infiniteId: +new Date(),
       loading: true,
+      suburl: "",
+      sub: false,
       playicon: "fas fa-spinner fa-pulse",
       playtext: "Loading Stuffs....",
       videoname: "",
+      loadImage: "",
       page: {
         page_token: null,
         page_index: 0,
@@ -279,8 +292,32 @@ export default {
 
       return array
     },
+    checkSuburl() {
+      const toks = this.videoname.split('.')
+      const pathSansExt = toks.slice(0, -1).join('.')
+      return this.files.forEach(async (item) => {
+         if(item.name == pathSansExt + ".srt" || item.name == pathSansExt + ".vtt"){
+           var blob = await this.getSrtFile(item.path);
+           this.suburl = blob;
+         } else {
+           this.sub = false;
+           this.suburl = "";
+           return;
+         }
+      });
+    },
+    async getSrtFile(url) {
+      const srt = await this.$http.get(url);
+      const blob = new Blob([srt2vtt(srt.data)], { type: 'text/vtt' })
+			var srtBlob = URL.createObjectURL(blob);
+      return srtBlob;
+    },
+    thum(url) {
+      return url ? `/${this.$route.params.id}:view?url=${url}` : "";
+    },
     downloadButton() {
-      window.open(this.videourl);
+      location.href = this.url.replace(/^\/(\d+:)\//, "/$1down/");
+      return;
     },
     getVideourl() {
       // Easy to debug in development environment
@@ -337,9 +374,11 @@ export default {
   activated() {
     this.getVideourl();
     this.render();
+    // this.getSrtFile("https://raw.githubusercontent.com/sampotts/plyr/master/demo/media/View_From_A_Blue_Moon_Trailer-HD.en.vtt");
   },
   computed: {
     getFilteredFiles() {
+      this.checkSuburl();
       return this.shuffle(this.files).filter(file => {
         return file.name != this.url.split('/').pop();
       }).filter(file => {
@@ -420,8 +459,14 @@ export default {
     },
   },
   mounted() {
+    if(window.themeOptions.loading_image){
+      this.loadImage = window.themeOptions.loading_image;
+    } else {
+      this.loadImage = "https://i.ibb.co/bsqHW2w/Lamplight-Mobile.gif"
+    }
     this.player = this.$refs.plyr.player
     this.videoname = this.url.split('/').pop();
+    console.log(this.files);
   },
   watch: {
     player: function(){
