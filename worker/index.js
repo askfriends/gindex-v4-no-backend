@@ -1,7 +1,7 @@
 // =======Options START=======
 var authConfig = {
   siteName: "Glory to Heaven",
-  version: "v7.7.6",
+  version: "v7.8.0",
   github_name: "tks18",
   github_repo: "gindex-v4-no-backend",
   favicon: "https://raw.githubusercontent.com/tks18/infozy/develop/favicon.ico",
@@ -255,7 +255,6 @@ function html(current_drive_order = 0, model = {}) {
         return categoryData;
       }))}'
     );
-    window.apiRoutes = JSON.parse('${JSON.stringify(routes)}');
     window.themeOptions = JSON.parse('${JSON.stringify(themeOptions)}');
     window.gds = JSON.parse('${JSON.stringify(
       authConfig.roots.map((it) => it.name)
