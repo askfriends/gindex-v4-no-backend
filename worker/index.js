@@ -203,6 +203,7 @@ const CONSTS = {
 var gds = [];
 
 function html(current_drive_order = 0, model = {}) {
+  var data = returnVue();
   return `
 <!DOCTYPE html>
 <html>
@@ -263,6 +264,7 @@ function html(current_drive_order = 0, model = {}) {
     window.MODEL = JSON.parse('${JSON.stringify(model)}');
     window.current_drive_order = ${current_drive_order};
   </script>
+  ${data}
 </head>
 <body>
     <div id="app"></div>
@@ -1038,6 +1040,19 @@ class googleDrive {
       }, ms);
     });
   }
+}
+
+function returnVue() {
+    return `
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156929545-2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-156929545-2');
+        </script>
+    `
 }
 
 String.prototype.trim = function (char) {
