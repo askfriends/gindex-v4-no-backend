@@ -10,7 +10,8 @@ import router from "./router";
 import vSelect from 'vue-select';
 import i18n from "./i18n";
 import VuePlyr from "vue-plyr"
-// store
+import vea from './vea';
+import secret from "../secret";
 import store from "@/store/index";
 import VueClipboard from "vue-clipboard2";
 import VueLazyload from "vue-lazyload";
@@ -24,6 +25,11 @@ Vue.config.productionTip = false;
 Vue.prototype.$cdnpath = cdnpath;
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
+Vue.use(vea, {
+  config: { id: secret.uid },
+  appName: 'Gindex-Ultimate',
+  pageTrackerScreenviewEnabled: true
+}, router)
 Vue.component('v-select', vSelect)
 Vue.use(require('vue-moment'));
 Vue.use(VueClipboard);
