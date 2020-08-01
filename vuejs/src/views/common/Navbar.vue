@@ -100,6 +100,11 @@ export default {
     Loading,
   },
   created() {
+    this.$bus.$on('td', () => {
+      this.quicklinks = window.quickLinks.filter((links) => {
+        return links.root == this.gdindex
+      })[0].link;
+    })
     this.active = false;
     this.siteName = document.getElementsByTagName("title")[0].innerText;
     if (window.gds && window.gds.length > 0) {
@@ -144,6 +149,7 @@ export default {
       }
     },
     changeItem(item) {
+      this.$bus.$emit("td", "TD Changed");
       this.currgd = item;
       this.$router.push({
         path: '/'+item.index+':home/',
