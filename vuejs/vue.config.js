@@ -113,7 +113,7 @@ module.exports = {
     publicPath,
     proxy: {
       "/api": {
-        target: "https://glorytoheaven.tk/",
+        target: "https://demo.gthu.workers.dev/",
         ws: true,
         changeOrigin: true,
         pathRewrite: {

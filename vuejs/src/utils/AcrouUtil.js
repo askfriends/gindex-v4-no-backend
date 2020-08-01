@@ -28,6 +28,16 @@ export const encodePath = (path) => {
   //return path.replace().replace("/", "%2F").replace("#", "%23")
 };
 
+export const srt2vtt = s =>
+	'WEBVTT FILE\r\n\r\n' +
+	s
+		.replace(/\{\\([ibu])\}/g, '</$1>')
+		.replace(/\{\\([ibu])1\}/g, '<$1>')
+		.replace(/\{([ibu])\}/g, '<$1>')
+		.replace(/\{\/([ibu])\}/g, '</$1>')
+		.replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2')
+		.concat('\r\n\r\n')
+
 export const checkoutPath = (path, file) => {
   path = encodePath(path);
   if (file.mimeType === "application/vnd.google-apps.folder") {
