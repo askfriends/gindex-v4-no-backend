@@ -8,6 +8,7 @@ import axios from "@/plugin/axios";
 import VueAxios from "vue-axios";
 import router from "./router";
 import vSelect from 'vue-select';
+import EventBus from "./EventBus";
 import i18n from "./i18n";
 import VuePlyr from "vue-plyr"
 import vea from './vea';
@@ -23,6 +24,7 @@ import "@/assets/style/theme/register.scss";
 
 Vue.config.productionTip = false;
 Vue.prototype.$cdnpath = cdnpath;
+Vue.prototype.$bus = EventBus;
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
 Vue.use(vea, {

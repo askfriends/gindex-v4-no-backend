@@ -311,7 +311,7 @@ async function handleRequest(request) {
   function redirectToIndexPage() {
     return new Response("", {
       status: 301,
-      headers: { Location: `/${authConfig.default_gd}:/` },
+      headers: { Location: `/${authConfig.default_gd}:home/` },
     });
   }
 
